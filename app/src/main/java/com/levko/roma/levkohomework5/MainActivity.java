@@ -14,17 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-
 public class MainActivity extends Activity implements View.OnClickListener {
 
     private EditText etTargetEmail, etThemeEmail, etTextEmail;
     private Button btnSendEmail, btnCallSupport;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +59,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         String sToWhom = etTargetEmail.getText().toString();
         String sTheme = etThemeEmail.getText().toString();
         String sTextToSend = etTextEmail.getText().toString();
-
-        if (validateEmailAddress(sToWhom)) {
-            if (!TextUtils.isEmpty(sToWhom) && !TextUtils.isEmpty(sTheme) && !TextUtils.isEmpty(sTextToSend)) {
+        if (!TextUtils.isEmpty(sToWhom) && !TextUtils.isEmpty(sTheme) && !TextUtils.isEmpty(sTextToSend)) {
+            if (validateEmailAddress(sToWhom)) {
                 Intent eMail = new Intent(Intent.ACTION_SEND);
                 eMail.putExtra(Intent.EXTRA_EMAIL, new String[]{sToWhom});
                 eMail.putExtra(Intent.EXTRA_SUBJECT, sTheme);
                 eMail.putExtra(Intent.EXTRA_TEXT, sTextToSend);
                 eMail.setType("plain/text");
                 startActivity(Intent.createChooser(eMail, "Send mail via:"));
-
-            } else Toast.makeText(this, Constants.WRITE_IN_EMPTY_FIELDS, Toast.LENGTH_LONG).show();
-        } else Toast.makeText(this, Constants.EMAIL_INCORRECT, Toast.LENGTH_LONG).show();
-
+            } else Toast.makeText(this, Constants.EMAIL_INCORRECT, Toast.LENGTH_LONG).show();
+        } else Toast.makeText(this, Constants.WRITE_IN_EMPTY_FIELDS, Toast.LENGTH_LONG).show();
     }
 
     private void callToSupport() {

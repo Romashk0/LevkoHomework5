@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LevkoHomework5</string>
+    <string name="target_email">Кому:</string>
+    <string name="theme_message">Тема:</string>
+    <string name="text">Введите текст сообщения:</string>
+    <string name="send">Отправить</string>
+    <string name="call">Звонок</string>
+</resources>

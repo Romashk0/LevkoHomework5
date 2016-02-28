@@ -1,25 +1,22 @@
 package com.levko.roma.levkohomework5;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.provider.SyncStateContract;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
-import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private EditText etTargetEmail, etThemeEmail, etTextEmail;
     private Button btnSendEmail, btnCallSupport;
@@ -36,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViews();
         setListeners();
-
     }
 
     private void findViews() {
@@ -62,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_call_AM:
                 callToSupport();
                 break;
-
         }
     }
 
@@ -71,15 +66,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String sTheme = etThemeEmail.getText().toString();
         String sTextToSend = etTextEmail.getText().toString();
 
-        if (!TextUtils.isEmpty(sToWhom) && !TextUtils.isEmpty(sTheme) && !TextUtils.isEmpty(sTextToSend)) {
-            Intent email = new Intent(Intent.ACTION_SEND);
-            email.putExtra(Intent.EXTRA_EMAIL, new String[]{sToWhom});
-            email.putExtra(Intent.EXTRA_SUBJECT, sTheme);
-            email.putExtra(Intent.EXTRA_TEXT, sTextToSend);
-            email.setType("Choose an Email client:");
+        if (validateEmailAddress(sToWhom)) {
+            if (!TextUtils.isEmpty(sToWhom) && !TextUtils.isEmpty(sTheme) && !TextUtils.isEmpty(sTextToSend)) {
+                Intent eMail = new Intent(Intent.ACTION_SEND);
+                eMail.putExtra(Intent.EXTRA_EMAIL, new String[]{sToWhom});
+                eMail.putExtra(Intent.EXTRA_SUBJECT, sTheme);
+                eMail.putExtra(Intent.EXTRA_TEXT, sTextToSend);
+                eMail.setType("plain/text");
+                startActivity(Intent.createChooser(eMail, "Send mail via:"));
 
-            startActivity(Intent.createChooser(email, "Choose an Email client:"));
-        }else Toast.makeText(this, Constants.WRITE_IN_EMPTY_FIELDS, Toast.LENGTH_LONG).show();
+            } else Toast.makeText(this, Constants.WRITE_IN_EMPTY_FIELDS, Toast.LENGTH_LONG).show();
+        } else Toast.makeText(this, Constants.EMAIL_INCORRECT, Toast.LENGTH_LONG).show();
+
     }
 
     private void callToSupport() {
@@ -91,5 +89,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         startActivity(toCall);
+    }
+
+    public static boolean validateEmailAddress(String address) {
+        return Patterns.EMAIL_ADDRESS.matcher(address).matches();
+
     }
 }

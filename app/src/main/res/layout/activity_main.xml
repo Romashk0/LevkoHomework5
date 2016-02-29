@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLayout"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="@color/colorLayout"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.levko.roma.levkohomework5.MainActivity">
 
@@ -16,26 +16,26 @@
         android:id="@+id/et_target_AM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/target_email"
+        android:layout_margin="@dimen/margin"
         android:background="@color/colorEditText"
-        android:layout_margin="@dimen/margin"/>
+        android:hint="@string/target_email" />
 
     <EditText
         android:id="@+id/et_theme_AM"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/theme_message"
+        android:layout_margin="@dimen/margin"
         android:background="@color/colorEditText"
-        android:layout_margin="@dimen/margin"/>
+        android:hint="@string/theme_message" />
 
     <EditText
         android:id="@+id/et_text_AM"
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_field"
-        android:hint="@string/text"
-        android:background="@color/colorEditText"
         android:layout_margin="@dimen/margin"
-        android:gravity="top" />
+        android:background="@color/colorEditText"
+        android:gravity="top"
+        android:hint="@string/text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,19 +46,19 @@
             android:id="@+id/btn_send_AM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/send"
-            android:layout_weight="1"
             android:layout_margin="@dimen/margin"
-            android:background="@color/colorButton"/>
+            android:layout_weight="1"
+            android:background="@color/colorButton"
+            android:text="@string/send" />
 
         <Button
             android:id="@+id/btn_call_AM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/call"
-            android:layout_weight="1"
             android:layout_margin="@dimen/margin"
-            android:background="@color/colorButton"/>
+            android:layout_weight="1"
+            android:background="@color/colorButton"
+            android:text="@string/call" />
     </LinearLayout>
 
 </LinearLayout>

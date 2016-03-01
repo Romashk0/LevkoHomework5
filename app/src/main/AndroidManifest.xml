@@ -3,6 +3,7 @@
     package="com.levko.roma.levkohomework5">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND" />
 
     <application
         android:allowBackup="true"
